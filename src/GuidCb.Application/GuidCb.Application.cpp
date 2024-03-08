@@ -2,12 +2,25 @@
 //
 
 #include "pch.h"
-#include <iostream>
+#include "TextCopier/TextCopier.cpp"
+#include "GuidGenerator/GuidGenerator.cpp"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    
+    GUID gidReference;
+    HRESULT hCreateGuid = CoCreateGuid(&gidReference);
+
+    GuidGenerator guidGenerator;
+    const char* guid = guidGenerator.GenerateGuid();
+
+    bool retFlag;
+    TextCopier textCopier;
+	textCopier.CopyText(guid, retFlag);
+
+    std::cout << "A new GUID has been copied to the clipboard.\n";
 }
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
